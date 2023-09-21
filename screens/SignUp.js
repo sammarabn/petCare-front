@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, ScrollView } from 'react-native';
+import { SafeAreaView, ScrollView, View } from 'react-native';
 import { TextInput, Button, Text, VStack, Box, Divider, HStack, Switch } from "@react-native-material/core";
 import DateTimePicker  from '@react-native-community/datetimepicker';
 import {
@@ -7,7 +7,6 @@ import {
     PureRoundedCheckbox,
   } from "react-native-rounded-checkbox";
 import DropDownPicker from 'react-native-dropdown-picker';
-import { View } from 'react-native';
 
 export default function SignUp({navigation, route}) {
     const [date, setDate] = useState(new Date(1598051730000));
@@ -21,11 +20,20 @@ export default function SignUp({navigation, route}) {
         {label: 'Outro', value: 'OTHER'},
     ]);
     const [castraded, setCastraded] = useState(true);
+    const [sex, setSex] = useState('F');
+    const sexM = false;
+    const sexF = true;
     
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate;
         setShow(false);
         setDate(currentDate);
+    };
+
+    const onChangeSex = (selectedSex) => {
+        sexF = selectedSex === 'F'? true: false;
+        sexM = !sexF;
+        setSex(selectedSex);
     };
 
     const showMode = (currentMode) => {
@@ -78,8 +86,8 @@ export default function SignUp({navigation, route}) {
                 </SafeAreaView>
 
                 <HStack>
-                    <PureRoundedCheckbox text={"F"} isChecked={true} checkedColor="#2EBC6B"/>
-                    <PureRoundedCheckbox text={"M"} isChecked={false} checkedColor="#2EBC6B"/>
+                    <PureRoundedCheckbox checkedColor="#2EBC6B" onPress={onChangeSex('F')}/>
+                    <PureRoundedCheckbox checkedColor="#2EBC6B" onPress={onChangeSex('M')}/>
                 </HStack>
 
                 <TextInput 
