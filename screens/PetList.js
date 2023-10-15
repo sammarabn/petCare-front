@@ -23,16 +23,24 @@ export default function PetList() {
       color="#2EBC6B"
     />
     <ListItem
-      title="Brunch this weekend?"
-      secondaryText="I'll be in your neighborhood doing errands this…"
+      title="Ignis"
+      secondaryText="Gato"
     />
     <ListItem
-      title="Summer BBQ"
-      secondaryText="Wish I could come, but I'm out of town this…"
+      title="Celeste"
+      secondaryText="Gato"
     />
     <ListItem
-      title="Oui Oui"
-      secondaryText="Do you have Paris recommendations? Have you ever…"
+      title="Eevee"
+      secondaryText="Gato"
+    />
+    <ListItem
+      title="Nino"
+      secondaryText="Gato"
+    />
+    <ListItem
+      title="Pretinha"
+      secondaryText="Cachorro"
     />
       </ScrollView>
   );
