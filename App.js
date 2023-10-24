@@ -14,9 +14,9 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={SignIn} options={{headerShown: false}}/>
-        {/*<Stack.Screen name="Sign Up" component={SignUp}/>
+        <Stack.Screen name="Sign Up" component={SignUp}/>
         <Stack.Screen name="PetList" component={PetList} options={{headerShown: false}}/>
-  <Stack.Screen name="PetView" component={PetView} options={{headerShown: false}}/>*/}
+        <Stack.Screen name="PetView" component={PetView} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
 )}
