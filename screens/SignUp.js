@@ -20,9 +20,6 @@ export default function SignUp({navigation, route}) {
         {label: 'Outro', value: 'OTHER'},
     ]);
     const [castraded, setCastraded] = useState(true);
-    const [sex, setSex] = useState('F');
-    const sexM = false;
-    const sexF = true;
     
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate;
@@ -85,11 +82,6 @@ export default function SignUp({navigation, route}) {
                     )}
                 </SafeAreaView>
 
-                <HStack>
-                    <PureRoundedCheckbox checkedColor="#2EBC6B" onPress={onChangeSex('F')}/>
-                    <PureRoundedCheckbox checkedColor="#2EBC6B" onPress={onChangeSex('M')}/>
-                </HStack>
-
                 <TextInput 
                     label="Peso" 
                     variant="standard"
@@ -105,6 +97,7 @@ export default function SignUp({navigation, route}) {
 
                 <TextInput secureTextEntry={true} label="Senha" variant="standard" color="#2EBC6B"/>
                 <TextInput secureTextEntry={true} label="Confirmar Senha" variant="standard" color="#2EBC6B"/>
+                <Button title="Concluir" color="#2EBC6B"/>
             </VStack>
         </ScrollView>
   );
