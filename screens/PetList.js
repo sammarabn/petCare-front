@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { AppBar, IconButton, HStack, ListItem } from "@react-native-material/core";
+import { AppBar, IconButton, HStack, ListItem, FAB, Stack } from "@react-native-material/core";
 import { StatusBar, ScrollView } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useLocation } from 'react-router-native';
+import { View } from 'react-native-web';
 var jwtDecode = require('jwt-decode');
 
 export default function PetList({ route }) {
@@ -55,7 +56,6 @@ export default function PetList({ route }) {
           button onPress={() => {handlePetData(pets)}}/>);
       })
     }
-    
-      </ScrollView>
+  </ScrollView>
   );
 } 

@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
+import { ListItem, IconButton } from "@react-native-material/core";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 function handleSex(sex){
   return sex === 'M'? 'Macho' : 'Femea';
 }
 
 function handleBirthDate(birthdate){
-  console.log(typeof birthdate);
   let data = birthdate.split('-');
   let year = data[0];
   let month = data[1];
@@ -76,23 +76,59 @@ function handleCastraded(castraded){
   return castraded? 'E castrado' : 'Nao e castrado'
 }
 
+
 function AboutScreen({route}) {
   const data = route.params
   return (
     <View>
-      <Text>Sexo: {handleSex(data.sex)}</Text>
-      <Text>Data de Nascimento: {handleBirthDate(data.birthdate)}</Text>
-      <Text>Tipo: {handleType(data.type)}</Text>
-      <Text>Peso: {data.weight}Kg</Text>
-      <Text>{handleCastraded(data.castraded)}</Text>
+      <ListItem title={"Sexo: " + handleSex(data.sex)} trailing={<IconButton icon={props => <Icon name="pencil" {...props}/>} />}/>
+      <ListItem title={"Data de Nascimento: " + handleBirthDate(data.birthdate)} trailing={<IconButton icon={props => <Icon name="pencil" {...props}/>} />}/>
+      <ListItem title={"Tipo: " + handleType(data.type)} trailing={<IconButton icon={props => <Icon name="pencil" {...props}/>} />}/>
+      <ListItem title={"Peso: " + data.weight + "Kg"} trailing={<IconButton icon={props => <Icon name="pencil" {...props}/>} />}/>
+      <ListItem title={handleCastraded(data.castraded)} trailing={<IconButton icon={props => <Icon name="pencil" {...props}/>} />}/>
     </View>
   );
 }
 
-function PreviousSurgeriesScreen() {
+function PreviousSurgeriesScreen({route}) {
+  const data = route.params
+
+  return (
+    <View>
+      {
+      data.previousSurgeries.map((surgery) => {
+        return (<ListItem
+          title={surgery}
+          trailing={<IconButton icon={props => <Icon name="pencil" {...props}/>} />}/>)
+      })
+    }
+    </View>
+    
+  );
+}
+
+function ConditionsScreen({route}) {
+  const data = route.params;
+
+  return (
+    <View>
+      {
+      data.conditions.map((condition) => {
+        return (<ListItem
+          title={condition}
+          trailing={<IconButton icon={props => <Icon name="pencil" {...props}/>} />}/>)
+      })
+    }
+    </View>
+  );
+}
+
+function MedicinesScreen({route}) {
+  const data = route.params
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text>
+      <Text>Este animal nao toma ou nao possui medicacao cadastrada.</Text>
     </View>
   );
 }
@@ -104,9 +140,31 @@ export default function PetView({ route }) {
   const petName = data.name;
   
   return (
-    <Tab.Navigator>
-      <Tab.Screen name={petName} component={AboutScreen} initialParams={data}/>
-      <Tab.Screen name="Medicacoes" component={PreviousSurgeriesScreen} />
+    <Tab.Navigator
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
+
+        if (route.name === petName) {
+          iconName = 'dog-side';
+        } else if (route.name === 'Cirurgias Anteriores') {
+          iconName = 'blood-bag';
+        } else if (route.name === 'Condicoes') {
+          iconName = 'information';
+        } else if(route.name === 'Medicamentos'){
+          iconName = 'medical-bag';
+        }
+
+        return <Icon name={iconName} size={size} color={color} />;
+      },
+      tabBarActiveTintColor: '#2EBC6B',
+      tabBarInactiveTintColor: 'gray',
+    })}
+    >
+      <Tab.Screen name={petName} component={AboutScreen} initialParams={data} />
+      <Tab.Screen name="Cirurgias Anteriores" initialParams={data} component={PreviousSurgeriesScreen} />
+      <Tab.Screen name="Condicoes" initialParams={data} component={ConditionsScreen} />
+      <Tab.Screen name="Medicamentos" initialParams={data} component={MedicinesScreen} />
     </Tab.Navigator>
   );
 } 
